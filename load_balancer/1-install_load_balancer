@@ -32,7 +32,7 @@ frontend http_front
 backend http_back
     balance roundrobin
     server 7259-web-01 16.60.183.4:80 check
-    server 7259-web-02 16.60.183.5:80 check
+    server 7259-web-02 35.178.245.96:80 check
 HAPROXY
 
 # Enable HAproxy and restart
