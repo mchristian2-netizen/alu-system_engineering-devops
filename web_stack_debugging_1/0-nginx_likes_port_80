@@ -1,8 +1,19 @@
 #!/usr/bin/env bash
-# Fixes Nginx to listen on port 80 of all active IPv4 IPs
+# Fixes Nginx to listen on port 80
 
-# Replace localhost binding with all IPs on port 80
-sed -i 's/listen 127.0.0.1:80 default_server;/listen 80 default_server;/g' /etc/nginx/sites-available/default
+# Overwrite the default config to guarantee it listens on port 80
+cat > /etc/nginx/sites-available/default << 'NGINX'
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+    server_name _;
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+NGINX
 
-# Restart Nginx
+# Restart Nginx to apply the changes
 service nginx restart
