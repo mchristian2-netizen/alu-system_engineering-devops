@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Starts the Apache service
-service apache2 start
+# Starts Apache and configures the index page
 
-# Creates the index.html page with the required text
+service apache2 start
 echo "Hello Holberton" > /var/www/html/index.html
